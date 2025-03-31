@@ -1,0 +1,44 @@
+Diferencias entre ROS 1 (Noetic) y ROS 2 (Humble, Iron, etc.)
+
+Arquitectura general:
+
+- En ROS 1 existe el concepto de `roscore` (ros master), que debe estar corriendo siempre. Es el nodo central que permite el descubrimiento y comunicación entre nodos.
+- En ROS 2 no existe `roscore`. El descubrimiento entre nodos es descentralizado, gracias al uso de DDS.
+- ROS 1 no utiliza DDS ni Fast DDS. Utiliza protocolos propios como TCPROS (por defecto) y UDPROS (para streaming).
+- En ROS 2 los nodos se descubren automáticamente entre sí en la red, sin necesidad de un servidor central.
+
+Sistema de construcción:
+
+- ROS 1 utiliza `catkin` como sistema de compilación, con herramientas como `catkin_make` o `catkin build`.
+- ROS 2 utiliza `ament` y se compila con `colcon build`.
+- En ROS 1, los paquetes generan carpetas `build/` y `devel/`. En ROS 2 se generan `build/`, `install/` y `log/`.
+- Para activar el entorno en ROS 1 se usa `source devel/setup.bash`; en ROS 2 se usa `source install/setup.bash`.
+
+Creación y estructura de paquetes:
+
+- En ROS 1 los paquetes se crean con `catkin_create_pkg`. En ROS 2 se utiliza `ros2 pkg create`.
+- Ambos usan `CMakeLists.txt` y `package.xml`, pero en ROS 2 `package.xml` es más estricto y debe especificar el tipo de sistema de compilación.
+- ROS 2 permite usar múltiples lenguajes de construcción en un mismo workspace, como C++, Python y hasta Rust. ROS 1 está limitado principalmente a C++ y Python.
+
+Comunicación:
+
+- En ROS 1 se utilizan herramientas como `rostopic`, `rosnode` y `rosservice`. En ROS 2 estas se reemplazan por `ros2 topic`, `ros2 node`, `ros2 service`, etc.
+- ROS 2 tiene soporte para QoS (Calidad de Servicio), lo que permite configurar confiabilidad, durabilidad, etc. En ROS 1 no existe esta opción.
+- ROS 2 tiene su propio sistema de grabación de datos (`ros2 bag`), que usa SQLite por defecto. En ROS 1 se usa `rosbag` con un formato propietario.
+
+Ejecución y despliegue:
+
+- En ROS 2 es posible cargar múltiples nodos dentro de un mismo proceso usando composable nodes, lo que mejora eficiencia. En ROS 1 cada nodo corre como un proceso separado.
+- ROS 2 permite definir un `ROS_DOMAIN_ID`, lo que facilita ejecutar múltiples robots en la misma red. En ROS 1 se requieren nombres de espacio y remapeos manuales.
+- ROS 2 soporta ejecución multihilo de forma nativa usando `MultiThreadedExecutor`. En ROS 1 se requiere manejarlo manualmente.
+
+Testing y herramientas de desarrollo:
+
+- En ROS 1 se usa `rostest`, principalmente con Google Test. En ROS 2 se usa `ament` con soporte para `pytest`, GTest y GMock.
+- ROS 2 trae herramientas nuevas como `ros2 interface` (para inspeccionar mensajes), `ros2 doctor` (para diagnósticos), entre otras.
+
+Parámetros y configuración:
+
+- En ROS 1 los parámetros se cargan con `rosparam` o desde archivos YAML. No tienen tipos estrictos ni validación.
+- En ROS 2 los parámetros deben declararse explícitamente, tienen tipo fijo y se pueden actualizar en tiempo de ejecución.
+- ROS 2 introduce los lifecycle nodes, nodos que tienen estados como `inactive`, `active`, `shutdown`, lo cual permite controlar el comportamiento del sistema de forma más segura y estructurada. Esto no existe en ROS 1.
