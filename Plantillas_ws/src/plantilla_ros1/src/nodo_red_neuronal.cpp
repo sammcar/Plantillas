@@ -20,7 +20,10 @@ public:
     // Inicializar entradas (K1, K2) y estados iniciales de las neuronas
     K1_ = 2.1;
     K2_ = 2.0;
-    n_ = {{0.0, 0.0}, {0.0, 0.0}};  // n[i][0] es el estado actual, n[i][1] es el próximo estado
+    for (int i = 0; i < cantidad_neuronas_; ++i) {
+      n_[i][0] = 0.0;
+      n_[i][1] = 0.0;
+    }
   }
 
 private:
@@ -33,7 +36,9 @@ private:
   double tau_ = 1.0;                    // Constante de tiempo
   double u_ = 0.1;                      // Umbral constante
   double K1_, K2_;                      // Entradas externas a las neuronas
-  double n_[2][2];                      // Estados de las neuronas (actual y siguiente)
+
+  static const int cantidad_neuronas_ = 2;             // Cantidad de neuronas
+  double n_[cantidad_neuronas_][2] = {};  // n[i][0] es el estado actual, n[i][1] es el próximo estado
 
   // Función de activación lineal con saturación inferior en 0
   double lineal(double X) {
@@ -55,7 +60,7 @@ private:
     ROS_INFO("n1: %.3f", n_[0][1]);
 
     // Actualizar los estados actuales con los nuevos valores
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < cantidad_neuronas_; ++i) {
       n_[i][0] = n_[i][1];
     }
   }
