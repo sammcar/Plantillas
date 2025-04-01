@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>my_robot_controller</name>
+  <name>cambiar_nombre</name>
   <version>0.1.0</version>
-  <description>Controlador general para el robot: nodos de movimiento, sensores y cámara.</description>
+  <description>¿Qué hace este paquete?</description>
 
-  <maintainer email="you@example.com">Tu Nombre</maintainer>
-  <author email="you@example.com">Tu Nombre</author>
+  <maintainer email="correo@example.com">Tu Nombre</maintainer>
+  <author email="correo@example.com">Tu Nombre</author>
   <license>MIT</license>
 
-  <!-- URLs opcionales -->
-  <url type="website">http://wiki.ros.org/my_robot_controller</url>
-  <url type="repository">https://github.com/tu_usuario/my_robot_controller</url>
+  <url type="website">http://wiki.ros.org/cambiar_nombre</url>
+  <url type="repository">https://github.com/tu_usuario/cambiar_nombre</url>
 
-  <!-- Dependencias de build -->
+  <!-- Dependencias de compilación -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>rospy</build_depend>
@@ -21,7 +20,6 @@
   <build_depend>nav_msgs</build_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>cv_bridge</build_depend>
-  <build_depend>turtlesim</build_depend>
   <build_depend>message_generation</build_depend>
 
   <!-- Dependencias de ejecución -->
@@ -32,10 +30,9 @@
   <exec_depend>nav_msgs</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>cv_bridge</exec_depend>
-  <exec_depend>turtlesim</exec_depend>
   <exec_depend>message_runtime</exec_depend>
 
-  <!-- Dependencias exportadas -->
+  <!-- Dependencias exportadas para otros paquetes -->
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
   <build_export_depend>std_msgs</build_export_depend>
@@ -44,6 +41,6 @@
   <test_depend>roslint</test_depend>
 
   <export>
-    <!-- Información adicional para herramientas -->
+    <!-- Espacio para herramientas adicionales -->
   </export>
 </package>
