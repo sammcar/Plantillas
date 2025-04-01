@@ -1,0 +1,25 @@
+<launch>
+  <!-- Argumento opcional para usar tiempo simulado -->
+  <arg name="use_sim_time" default="false" />
+
+  <!-- Nodo en Python -->
+  <node 
+    pkg="paquete_python" 
+    type="nodo_py.py" 
+    name="nodo_python" 
+    output="screen">
+    
+    <param name="use_sim_time" value="$(arg use_sim_time)" />
+  </node>
+
+  <!-- Nodo en C++ -->
+  <node 
+    pkg="paquete_cpp" 
+    type="nodo_cpp" 
+    name="nodo_cpp" 
+    output="screen">
+    
+    <param name="use_sim_time" value="$(arg use_sim_time)" />
+  </node>
+
+</launch>
